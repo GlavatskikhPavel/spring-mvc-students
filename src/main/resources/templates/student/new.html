@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0,
+          minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Student</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/fonts/fonts.css}" rel="stylesheet" />
+</head>
+<body>
+<div id="container">
+    <header>
+        <nav class="head">
+            <h1 class="title">Система управления студентами и их успеваемостью</h1>
+            <div class="login">
+                <div><p>Привет, admin!</p></div>
+                <div><a href="/logout">Logout</a></div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="content">
+            <div class="side_menu">
+                <div><a href="/home">На главную</a></div>
+                <div><a href="/students">Назад</a></div>
+            </div>
+            <div class="main">
+                <h2>Для создания студента заполните все поля и нажмите кнопку "Создать".</h2>
+                <div class="form_cm">
+                    <form th:method="POST" th:action="@{/students}" th:object="${student}">
+                        <div class="line2">
+                            <div>Фамилия</div>
+                            <label for="surname">
+                                <input type="text" th:field="*{surname}" id="surname"/>
+                            </label>
+                        </div>
+                        <div class="line2">
+                            <div>Имя</div>
+                            <label for="name">
+                                <input type="text" th:field="*{name}" id="name"/>
+                            </label>
+                        </div>
+                        <div class="line2">
+                            <div>Группа</div>
+                            <label for="group">
+                                <input type="text" th:field="*{group.name}" id="group"/>
+                            </label>
+                        </div>
+                        <div class="line2">
+                            <div>Дата поступления</div>
+                            <label for="student-admission-date">
+                                <input type="text" th:field="*{admissionDate}" id="student-admission-date"/>
+                            </label>
+                        </div>
+                        <input class="button_cm_student" type="submit" value="Создать">
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>
