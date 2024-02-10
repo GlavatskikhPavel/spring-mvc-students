@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Discipline Modifying</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/fonts/fonts.css}" rel="stylesheet" />
+</head>
+<body>
+<div id="container">
+    <header>
+        <nav class="head">
+            <h1 class="title">Система управления студентами и их успеваемостью</h1>
+            <div class="login">
+                <div><p>Привет, admin!</p></div>
+                <div><a href="/logout">Logout</a></div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="content">
+            <div class="side_menu">
+                <div><a href="/home">На главную</a></div>
+                <div><a href="/disciplines">Назад</a></div>
+            </div>
+            <div class="main">
+                <h2>Для того чтобы модифицировать дисциплину введите новое значение поля и нажмите кнопку
+                    "Применить":</h2>
+                <div class="form_cm">
+                    <form th:action="@{/disciplines}" th:object="${discipline}" th:method="patch">
+                        <input type="hidden" th:value="${discipline.id}" th:attr=" name='id'">
+                        <input type="hidden" name="id" value="1">
+                        <div class="line3">
+                            <div>Название</div>
+                            <label for="name">
+                                <input type="text" th:field="*{name}" name="name" id="name">
+                            </label>
+                        </div>
+                        <input class="button_cm_discipline" type="submit" value="Применить">
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>
