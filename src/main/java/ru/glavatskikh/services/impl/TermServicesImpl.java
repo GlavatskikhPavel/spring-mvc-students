@@ -8,6 +8,7 @@ import ru.glavatskikh.model.Term;
 import ru.glavatskikh.repository.TermRepository;
 import ru.glavatskikh.services.TermServices;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 

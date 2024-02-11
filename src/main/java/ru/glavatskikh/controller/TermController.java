@@ -11,6 +11,8 @@ import ru.glavatskikh.model.Term;
 import ru.glavatskikh.services.DisciplineServices;
 import ru.glavatskikh.services.TermServices;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/terms")
@@ -22,12 +24,15 @@ public class TermController {
     public String getAll(Model model, @ModelAttribute("term") Term term,
                          @RequestParam(value = "id", required = false) Long id) {
         if (id == null) {
-            model.addAttribute("termList", termServices.getAll());
+            List<Term> terms = termServices.getAll();
+            model.addAttribute("termList", terms);
             model.addAttribute("disciplineList" , disciplineServices.getAll());
+            model.addAttribute("duration", terms.get(0).getDuration());
         } else {
             Term termDb = termServices.findOne(id);
             model.addAttribute("termList", termServices.getAll());
             model.addAttribute("disciplineList", termServices.getDisciplines(termDb));
+            model.addAttribute("duration", termDb.getDuration());
         }
         return "term/list";
     }
