@@ -3,10 +3,7 @@ package ru.glavatskikh.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.glavatskikh.model.Term;
 import ru.glavatskikh.services.DisciplineServices;
 import ru.glavatskikh.services.TermServices;
@@ -26,7 +23,7 @@ public class TermController {
         if (id == null) {
             List<Term> terms = termServices.getAll();
             model.addAttribute("termList", terms);
-            model.addAttribute("disciplineList" , disciplineServices.getAll());
+            model.addAttribute("disciplineList", disciplineServices.getAll());
             model.addAttribute("duration", terms.get(0).getDuration());
         } else {
             Term termDb = termServices.findOne(id);
@@ -38,7 +35,16 @@ public class TermController {
     }
 
     @GetMapping("/new")
-    public String getFormNew(@ModelAttribute("term") Term term) {
+    public String getFormNew(@ModelAttribute("term") Term term, Model model) {
+        model.addAttribute("disciplineList", disciplineServices.getAll());
         return "term/new";
     }
+
+    @PostMapping
+    public String save(@ModelAttribute("term") Term term) {
+        termServices.save(term);
+        return "redirect:/terms";
+    }
+
+
 }

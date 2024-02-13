@@ -8,7 +8,6 @@ import ru.glavatskikh.model.Term;
 import ru.glavatskikh.repository.TermRepository;
 import ru.glavatskikh.services.TermServices;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +24,9 @@ public class TermServicesImpl implements TermServices {
 
     @Override
     public void save(Term term) {
-
+        Long idName = getLastId();
+        term.setName("Семестр " + (idName + 1));
+        termRepository.save(term);
     }
 
     @Override
@@ -46,5 +47,11 @@ public class TermServicesImpl implements TermServices {
 
     public List<Discipline> getDisciplines(Term term) {
         return term.getDisciplines();
+    }
+
+    private Long getLastId() {
+        List<Term> list = termRepository.findAll();
+        Term lastElement = list.get(list.size() - 1);
+        return lastElement.getId();
     }
 }
