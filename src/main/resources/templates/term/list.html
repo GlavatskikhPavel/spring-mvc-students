@@ -44,7 +44,7 @@
           </div>
           <div class="term_duration">
             <h2>Длительность семестра:</h2>
-            <h2 th:text="${duration}">24 недели</h2>
+            <h2 th:text="${duration}"></h2>
           </div>
           <h2 class="list_dt">Список дисциплин семестра</h2>
           <div class="terms_section2">
@@ -63,12 +63,12 @@
                 <form action="/terms/new" method="get">
                   <input class="button_terms" type="submit" value="Создать семестр…">
                 </form>
-                <form action="/term_modifying" method="get">
-                  <input type="hidden" name="idTermToModifying" value="1">
+                <form action="/terms/edit" method="get">
+                  <input type="hidden" name="idModify" th:value="*{idTerm}">
                   <input class="button_terms" type="submit" value="Модифицировать текущий семестр…">
                 </form>
-                <form action="/term_deleting" method="get">
-                  <input type="hidden" name="idTermToDelete" value="1">
+                <form th:action="@{/terms}" th:method="delete">
+                  <input type="hidden" name="idDelete" th:value="*{idDelete}">
                   <input class="button_terms" type="submit" value="Удалить текущий семестр…">
                 </form>
               </div>

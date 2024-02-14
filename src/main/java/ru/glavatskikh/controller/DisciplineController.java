@@ -25,8 +25,8 @@ public class DisciplineController {
     }
 
     @GetMapping("/edit")
-    public String getEdit(@RequestParam("idModify") String idModify, Model model) {
-        model.addAttribute("discipline", disciplineServices.getById(Long.parseLong(idModify)));
+    public String getEdit(@RequestParam("idModify") Long idModify, Model model) {
+        model.addAttribute("discipline", disciplineServices.getById(idModify));
         return "discipline/edit";
     }
 
@@ -37,7 +37,8 @@ public class DisciplineController {
     }
 
     @PatchMapping
-    public String update(@ModelAttribute("discipline") Discipline discipline, @RequestParam("id") Long id) {
+    public String update(@ModelAttribute("discipline") Discipline discipline,
+                         @RequestParam("id") Long id) {
         disciplineServices.update(id, discipline);
         return "redirect:/disciplines";
     }

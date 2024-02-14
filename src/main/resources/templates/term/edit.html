@@ -5,7 +5,7 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Term Creating</title>
+  <title>Term Modifying</title>
   <link th:href="@{/css/style.css}" rel="stylesheet" />
   <link th:href="@{/fonts/fonts.css}" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/habibmhamadi/multi-select-tag@2.0.1/dist/css/multi-select-tag.css">
@@ -28,13 +28,14 @@
         <div><a href="/terms">Назад</a></div>
       </div>
       <div class="main">
-        <h2>Для создания семестра заполните следующие данные и нажмите кнопку "Создать".</h2>
+        <h2>Для модификации семестра отредактируйте данные и нажмите кнопку "Применить".</h2>
         <div class="form_cm">
-          <form th:action="@{/terms}" th:object="${term}" th:method="post">
+          <form th:action="@{/terms}" th:object="${term}" th:method="patch">
+            <input type="hidden" th:value="${idTerm}" th:attr=" name='id'">
             <div class="line5">
               <div>Длительность (в неделях)</div>
               <label>
-                <input name="duration" type="text" value="24 недели">
+                <input name="duration" type="text" th:value="${duration}">
               </label>
             </div>
             <div class="line5">

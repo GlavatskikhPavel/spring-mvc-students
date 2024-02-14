@@ -37,7 +37,8 @@ public class StudentControllers {
     }
 
     @PatchMapping
-    public String update(@ModelAttribute("student") Student student, @RequestParam("id") Long id) {
+    public String update(@ModelAttribute("student") Student student,
+                         @RequestParam("id") Long id) {
         studentServices.update(id, student);
         return "redirect:/students";
     }

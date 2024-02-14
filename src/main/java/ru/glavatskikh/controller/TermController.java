@@ -30,6 +30,8 @@ public class TermController {
             model.addAttribute("termList", termServices.getAll());
             model.addAttribute("disciplineList", termServices.getDisciplines(termDb));
             model.addAttribute("duration", termDb.getDuration());
+            model.addAttribute("idTerm", termDb.getId());
+            model.addAttribute("idDelete", termDb.getId());
         }
         return "term/list";
     }
@@ -40,11 +42,38 @@ public class TermController {
         return "term/new";
     }
 
+    @GetMapping("/edit")
+    public String getEdit(@RequestParam(value = "idModify", required = false) Long id,
+                          Model model, @ModelAttribute("term") Term term) {
+        if (id == null) {
+            return "redirect:/terms";
+        }
+        Term termDb = termServices.findOne(id);
+        model.addAttribute("disciplineList", disciplineServices.getAll());
+        model.addAttribute("duration", termDb.getDuration());
+        model.addAttribute("idTerm", termDb.getId());
+        return "term/edit";
+    }
+
     @PostMapping
     public String save(@ModelAttribute("term") Term term) {
         termServices.save(term);
         return "redirect:/terms";
     }
 
+    @PatchMapping
+    public String update(@ModelAttribute("term") Term term,
+                         @RequestParam(value = "id", required = false) Long id) {
+        termServices.update(id, term);
+        return "redirect:/terms";
+    }
 
+    @DeleteMapping
+    public String delete(@RequestParam(value = "idDelete", required = false) Long id) {
+        if (id == null) {
+            return "redirect:/terms";
+        }
+        termServices.delete(id);
+        return "redirect:/terms";
+    }
 }

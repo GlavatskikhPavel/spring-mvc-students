@@ -8,7 +8,7 @@ import java.util.List;
 public interface TermServices {
     List<Term> getAll();
     void save(Term term);
-    void delete(String ids);
+    void delete(Long id);
     void update(long id, Term term);
     Term findOne(Long id);
     List<Discipline> getDisciplines(Term term);

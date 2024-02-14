@@ -24,19 +24,25 @@ public class TermServicesImpl implements TermServices {
 
     @Override
     public void save(Term term) {
-        Long idName = getLastId();
-        term.setName("Семестр " + (idName + 1));
+        term.setName("Семестр " + (Integer.parseInt(getLastId()) + 1));
         termRepository.save(term);
     }
 
     @Override
-    public void delete(String ids) {
-
+    public void delete(Long id) {
+        termRepository.delete(findOne(id));
     }
 
     @Override
     public void update(long id, Term term) {
-
+        Term termDB = findOne(id);
+        Term newTerm = new Term();
+        newTerm.setId(id);
+        newTerm.setName(termDB.getName());
+        newTerm.setDisciplines(term.getDisciplines());
+        newTerm.setDuration(term.getDuration());
+        newTerm.setGrade(termDB.getGrade());
+        termRepository.save(newTerm);
     }
 
     @Override
@@ -49,9 +55,11 @@ public class TermServicesImpl implements TermServices {
         return term.getDisciplines();
     }
 
-    private Long getLastId() {
+    private String getLastId() {
         List<Term> list = termRepository.findAll();
         Term lastElement = list.get(list.size() - 1);
-        return lastElement.getId();
+        String line = lastElement.getName();
+        String[] array = line.split(" ");
+        return array[1];
     }
 }
