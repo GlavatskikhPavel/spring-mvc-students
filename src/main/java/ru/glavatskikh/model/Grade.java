@@ -5,26 +5,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.List;
+
 @Data
 @Entity
 @NoArgsConstructor
 @Table(name = "grade")
-@ToString(exclude = {"student", "term", "discipline"})
+@ToString
 public class Grade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true)
     private Long id;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "term_id", referencedColumnName = "id")
     private Term term;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "discipline_id", referencedColumnName = "id")
     private Discipline discipline;
 
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "student_id", referencedColumnName = "id")
     private Student student;
 

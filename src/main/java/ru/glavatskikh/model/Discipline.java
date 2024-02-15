@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @Table(name = "discipline")
-@ToString(exclude = {"grade"})
+@ToString
 public class Discipline {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +22,9 @@ public class Discipline {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "discipline")
-    private Grade grade;
+    @ToString.Exclude
+    @OneToMany(mappedBy = "discipline", cascade = CascadeType.ALL)
+    private List<Grade> grades = new ArrayList<>();
 
     @ManyToMany(mappedBy = "disciplines")
     private List<Term> terms = new ArrayList<>();

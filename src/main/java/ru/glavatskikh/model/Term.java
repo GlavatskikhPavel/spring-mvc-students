@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name = "term")
-@ToString(exclude = {"grade"})
+@ToString
 public class Term {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,16 +25,16 @@ public class Term {
     @Column(name = "duration")
     private String duration;
 
-    @OneToOne(mappedBy = "term")
-    private Grade grade;
-
     @ManyToMany
     @JoinTable(
             name = "term_discipline",
             joinColumns = @JoinColumn(name = "term_id"),
-            inverseJoinColumns = @JoinColumn(name = "discipline_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "discipline_id"))
     private List<Discipline> disciplines = new ArrayList<>();
+
+    @OneToMany(mappedBy = "term", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<Grade> grades = new ArrayList<>();
 
     @Override
     public String toString() {

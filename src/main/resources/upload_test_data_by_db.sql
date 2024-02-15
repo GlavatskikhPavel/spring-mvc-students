@@ -12,7 +12,10 @@ INSERT INTO `students_system_management`.`term` (`id`, `duration`, `name`) VALUE
 insert into `students_system_management`.`term_discipline` (`discipline_id`, `term_id`) VALUES ('1', '1');
 insert into `students_system_management`.`term_discipline` (`discipline_id`, `term_id`) VALUES ('2', '1');
 insert into `students_system_management`.`term_discipline` (`discipline_id`, `term_id`) VALUES ('1', '2');
-
+INSERT INTO `students_system_management`.`grade` (`grade`, `discipline_id`, `id`, `student_id`, `term_id`) VALUES ('3', '1', '1', '1', '1');
+INSERT INTO `students_system_management`.`grade` (`grade`, `discipline_id`, `id`, `student_id`, `term_id`) VALUES ('4', '2', '2', '1', '1');
+INSERT INTO `students_system_management`.`grade` (`grade`, `discipline_id`, `id`, `student_id`, `term_id`) VALUES ('5', '2', '3', '1', '1');
+INSERT INTO `students_system_management`.`grade` (`grade`, `discipline_id`, `id`, `student_id`, `term_id`) VALUES ('2', '3', '4', '2', '2');
 
 
 

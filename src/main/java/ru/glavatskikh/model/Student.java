@@ -6,13 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
 @NoArgsConstructor
 @Table(name = "student")
-@ToString(exclude = {"admissionDate", "group"})
+@ToString
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,4 +35,8 @@ public class Student {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id", referencedColumnName = "id")
     private Group group;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    private List<Grade> grades = new ArrayList<>();
 }

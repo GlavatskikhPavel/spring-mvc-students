@@ -6,8 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Student Progress</title>
-    <link th:href="@{/css/style.css}" rel="stylesheet" />
-    <link th:href="@{/fonts/fonts.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/fonts/fonts.css}" rel="stylesheet"/>
     <script type="text/javascript" th:src="@{/js/student.js}"></script>
 </head>
 <body>
@@ -53,9 +53,9 @@
                                 <th class="lm_col0">Дисциплина</th>
                                 <th class="lm_col1">Оценка</th>
                             </tr>
-                            <tr>
-                                <td class="lm_col0">Высшая математика</td>
-                                <td class="lm_col1">4</td>
+                            <tr th:each="g : ${grades}">
+                                <td class="l_col1" th:utext="${g.discipline.name}"></td>
+                                <td class="l_col1" th:utext="${g.grade}"></td>
                             </tr>
                         </table>
                     </div>
@@ -65,10 +65,9 @@
                             <form action="/student_progress" method="get">
                                 <label>
                                     <input type="hidden" name="progressHidden" value="1">
-                                    <select name="idSelectedTerm">
-                                        <option selected value="1">Семестр 1</option>
-                                        <option value="2">Семестр 2</option>
-                                        <option value="3">Семестр 3</option>
+                                    <select>
+                                        <option th:each="t : ${termList}" th:value="${t.id}"
+                                                th:text="${t.name}"></option>
                                     </select>
                                 </label>
                                 <input class="button_term" type="submit" value="Выбрать">

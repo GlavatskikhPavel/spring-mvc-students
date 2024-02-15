@@ -41,7 +41,7 @@ public class TermServicesImpl implements TermServices {
         newTerm.setName(termDB.getName());
         newTerm.setDisciplines(term.getDisciplines());
         newTerm.setDuration(term.getDuration());
-        newTerm.setGrade(termDB.getGrade());
+        newTerm.setGrades(termDB.getGrades());
         termRepository.save(newTerm);
     }
 

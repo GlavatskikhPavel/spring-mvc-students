@@ -4,14 +4,26 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.glavatskikh.model.Discipline;
+import ru.glavatskikh.model.Grade;
 import ru.glavatskikh.model.Student;
+import ru.glavatskikh.model.Term;
+import ru.glavatskikh.services.DisciplineServices;
+import ru.glavatskikh.services.GradeServices;
 import ru.glavatskikh.services.StudentServices;
+import ru.glavatskikh.services.TermServices;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping("/students")
 @Controller
 @RequiredArgsConstructor
 public class StudentControllers {
     private final StudentServices studentServices;
+    private final GradeServices gradeServices;
+    private final DisciplineServices disciplineServices;
+    private final TermServices termServices;
 
     @GetMapping()
     public String getAll(Model model) {
@@ -52,10 +64,12 @@ public class StudentControllers {
     @PatchMapping("/progress")
     public String progress(@RequestParam("idProgress") Long id, Model model,
                            @ModelAttribute("student") Student student) {
-        model.addAttribute("student", studentServices.findOne(id));
-
-
-
+        Student studentDB = studentServices.findOne(id);
+        model.addAttribute("student", studentDB);
+        List<Grade> grades = studentDB.getGrades();
+        model.addAttribute("termList", termServices.getAll());
+        model.addAttribute("grades", grades);
+        System.out.println();
         return "student/progress";
     }
 }
