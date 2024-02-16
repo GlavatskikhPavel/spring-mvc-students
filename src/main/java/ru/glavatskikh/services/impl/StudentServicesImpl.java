@@ -29,8 +29,8 @@ public class StudentServicesImpl implements StudentServices {
     @Override
     public void save(Student student) {
         try {
-            Group groupDb = getGroup(student.getGroup().getName());
-            if (groupDb == null) {
+            Group groupName = getGroup(student.getGroup().getName());
+            if (groupName == null) {
                 Group group = new Group();
                 group.addStudent(student);
                 group.setName(student.getGroup().getName());
@@ -40,10 +40,9 @@ public class StudentServicesImpl implements StudentServices {
                 log.info("Save new group: {}", group.getName());
                 log.info("Save new student: {}", student.getName());
             } else {
-                student.setGroup(groupDb);
-                groupDb.addStudent(student);
+                student.setGroup(groupName);
                 studentRepository.save(student);
-                log.info("Save new student by existing group: {}", groupDb.getName());
+                log.info("Save new student by existing group: {}", groupName.getName());
             }
         } catch (NullPointerException exception) {
             throw exception;
@@ -55,16 +54,18 @@ public class StudentServicesImpl implements StudentServices {
         updateStudent.setId(student.getId());
         updateStudent.setSurname(student.getSurname());
         updateStudent.setName(student.getName());
-        Group groupDb = getGroup(student.getGroup().getName());
-        if (groupDb == null) {
+        Group groupName = getGroup(student.getGroup().getName());
+        if (groupName == null) {
             Group group = new Group();
             group.addStudent(updateStudent);
             group.setName(student.getGroup().getName());
             groupRepository.save(group);
             updateStudent.setGroup(group);
+            log.info("Save new group: {}", group.getName());
+            log.info("Update student: {}", student.getName());
         } else {
-            updateStudent.setGroup(groupDb);
-            groupDb.addStudent(student);
+            updateStudent.setGroup(groupName);
+            groupName.addStudent(student);
         }
         groupRepository.save(updateStudent.getGroup());
         updateStudent.setAdmissionDate(student.getAdmissionDate());

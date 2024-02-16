@@ -66,8 +66,8 @@
                                 <label>
                                     <input type="hidden" name="progressHidden" value="1">
                                     <select>
-                                        <option th:each="t : ${termList}" th:value="${t.id}"
-                                                th:text="${t.name}"></option>
+                                        <option th:each="t : ${grades}" th:value="${t.id}"
+                                                th:text="${t.term.name}"></option>
                                     </select>
                                 </label>
                                 <input class="button_term" type="submit" value="Выбрать">

@@ -4,16 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.glavatskikh.model.Discipline;
 import ru.glavatskikh.model.Grade;
 import ru.glavatskikh.model.Student;
-import ru.glavatskikh.model.Term;
 import ru.glavatskikh.services.DisciplineServices;
 import ru.glavatskikh.services.GradeServices;
 import ru.glavatskikh.services.StudentServices;
 import ru.glavatskikh.services.TermServices;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/students")
@@ -64,6 +60,7 @@ public class StudentControllers {
     @PatchMapping("/progress")
     public String progress(@RequestParam("idProgress") Long id, Model model,
                            @ModelAttribute("student") Student student) {
+
         Student studentDB = studentServices.findOne(id);
         model.addAttribute("student", studentDB);
         List<Grade> grades = studentDB.getGrades();
