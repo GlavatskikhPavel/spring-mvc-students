@@ -30,7 +30,6 @@
             <div class="main">
                 <h2>Отображена успеваемость для следующего студента:</h2>
                 <div class="progress">
-                    <input type="hidden" name="idStudent" value="1">
                     <table class="list">
                         <tr>
                             <th class="lp_col0">Фамилия</th>
@@ -62,12 +61,12 @@
                     <div class="term_average_mark">
                         <div class="term">
                             Выбрать семестр
-                            <form action="/student_progress" method="get">
+                            <form action="/students/progress" method="get">
                                 <label>
-                                    <input type="hidden" name="progressHidden" value="1">
-                                    <select>
-                                        <option th:each="t : ${grades}" th:value="${t.id}"
-                                                th:text="${t.term.name}"></option>
+                                    <input type="hidden" th:value="${student.id}" th:attr=" name='id_progress'">
+                                    <select th:object="${term}" th:field="*{id}">
+                                        <option th:each="t : ${termList}" th:value="${t.id}"
+                                                th:text="${t.name}"></option>
                                     </select>
                                 </label>
                                 <input class="button_term" type="submit" value="Выбрать">
@@ -75,7 +74,7 @@
                         </div>
                         <div class="average_mark">
                             Средняя оценка за семестр:
-                            <h3>3,40 балла</h3>
+                            <h3>3,40 балла</h3> m
                         </div>
                     </div>
                 </div>

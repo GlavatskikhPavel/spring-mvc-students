@@ -71,7 +71,7 @@
 <form th:action="@{/students/edit}" th:method="get" th:id="modifyForm">
     <input th:type="hidden" th:id="idModify" th:name="idModify">
 </form>
-<form th:action="@{/students/progress}" th:method="patch" id="progressForm">
-    <input th:type="hidden" th:id="idProgress" th:name="idProgress">
+<form th:action="@{/students/progress}" th:method="get" th:id="progressForm">
+    <input th:type="hidden" th:id="idProgress" th:name="id_progress">
 </form>
 </html>
