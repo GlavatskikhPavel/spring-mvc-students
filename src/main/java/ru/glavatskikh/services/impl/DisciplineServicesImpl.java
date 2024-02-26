@@ -18,11 +18,13 @@ public class DisciplineServicesImpl implements DisciplineServices {
 
     @Override
     public List<Discipline> getAll() {
+        log.info("Get all Disciplines");
         return disciplineRepository.findAll();
     }
 
     @Override
     public void save(Discipline discipline) {
+        log.info("Save new Disciplines");
         disciplineRepository.save(discipline);
     }
 
@@ -41,6 +43,7 @@ public class DisciplineServicesImpl implements DisciplineServices {
         Discipline updateDiscipline = new Discipline();
         updateDiscipline.setId(discipline.getId());
         updateDiscipline.setName(discipline.getName());
+        log.info("Update Disciplines");
         disciplineRepository.save(updateDiscipline);
     }
 

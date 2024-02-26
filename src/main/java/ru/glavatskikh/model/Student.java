@@ -1,6 +1,7 @@
 package ru.glavatskikh.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -21,12 +22,17 @@ public class Student {
     @Column(name = "id", unique = true)
     private Long id;
 
+    @NotEmpty(message = "Имя не должно быть пустым")
+    @Size(min = 2, max = 30, message = "Имя должно быть от 2 до 30 символов длиной")
     @Column(name = "name")
     private String name;
 
+    @NotEmpty(message = "Фамилия не должна быть пустой")
+    @Size(min = 2, max = 30, message = "Фамилия должна быть от 2 до 30 символов длиной")
     @Column(name = "surname")
     private String surname;
 
+    @NotNull(message = "Укажите дату поступления. ДД/ММ/ГГГГ")
     @Column(name = "admission_date")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")            // ДД/ММ/ГГГГ

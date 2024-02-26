@@ -34,6 +34,7 @@
               <div>Название</div>
               <label for="name">
                 <input type="text" th:field="*{name}" id="name"/>
+                <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name Error</div>
               </label>
             </div>
             <input class="button_cm_discipline" type="submit" value="Создать">

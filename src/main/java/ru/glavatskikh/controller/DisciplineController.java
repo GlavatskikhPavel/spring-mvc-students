@@ -1,8 +1,10 @@
 package ru.glavatskikh.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.glavatskikh.model.Discipline;
 import ru.glavatskikh.services.DisciplineServices;
@@ -31,14 +33,17 @@ public class DisciplineController {
     }
 
     @PostMapping
-    public String save(@ModelAttribute("discipline") Discipline discipline) {
+    public String save(@ModelAttribute("discipline") @Valid Discipline discipline,
+                       BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "discipline/new";
         disciplineServices.save(discipline);
         return "redirect:/disciplines";
     }
 
     @PatchMapping
-    public String update(@ModelAttribute("discipline") Discipline discipline,
-                         @RequestParam("id") Long id) {
+    public String update(@ModelAttribute("discipline") @Valid Discipline discipline,
+                         BindingResult bindingResult, @RequestParam("id") Long id) {
+        if (bindingResult.hasErrors()) return "discipline/edit";
         disciplineServices.update(id, discipline);
         return "redirect:/disciplines";
     }

@@ -11,7 +11,6 @@ import ru.glavatskikh.services.StudentServices;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -66,6 +65,7 @@ public class StudentServicesImpl implements StudentServices {
         } else {
             updateStudent.setGroup(groupName);
             groupName.addStudent(student);
+            log.info("Update student: {}", student.getName());
         }
         groupRepository.save(updateStudent.getGroup());
         updateStudent.setAdmissionDate(student.getAdmissionDate());

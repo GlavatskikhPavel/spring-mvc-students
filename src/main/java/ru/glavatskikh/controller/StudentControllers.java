@@ -1,18 +1,17 @@
 package ru.glavatskikh.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.glavatskikh.model.Grade;
 import ru.glavatskikh.model.Student;
 import ru.glavatskikh.model.Term;
-import ru.glavatskikh.services.DisciplineServices;
-import ru.glavatskikh.services.GradeServices;
 import ru.glavatskikh.services.StudentServices;
 import ru.glavatskikh.services.TermServices;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,8 +20,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class StudentControllers {
     private final StudentServices studentServices;
-    private final GradeServices gradeServices;
-    private final DisciplineServices disciplineServices;
     private final TermServices termServices;
 
     @GetMapping()
@@ -43,14 +40,18 @@ public class StudentControllers {
     }
 
     @PostMapping()
-    public String save(@ModelAttribute("student") Student student) {
+    public String save(@ModelAttribute("student") @Valid Student student,
+                       BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "student/new";
         studentServices.save(student);
         return "redirect:/students";
     }
 
     @PatchMapping
-    public String update(@ModelAttribute("student") Student student,
+    public String update(@ModelAttribute("student") @Valid Student student,
+                         BindingResult bindingResult,
                          @RequestParam("id") Long id) {
+        if (bindingResult.hasErrors()) return "student/edit";
         studentServices.update(id, student);
         return "redirect:/students";
     }
@@ -70,13 +71,13 @@ public class StudentControllers {
             Student studentDB = studentServices.findOne(idStudent);
             model.addAttribute("student", studentDB);
             List<Grade> grades = studentDB.getGrades();
-            System.out.println();
             List<Grade> gradesTermId = grades
                     .stream()
                     .filter(n -> n.getTerm().getId().equals(idTerm))
                     .collect(Collectors.toList());
             model.addAttribute("grades", gradesTermId);
             model.addAttribute("termList", termServices.getAll());
+            model.addAttribute("summa", gradesTermId.stream().mapToInt(n -> n.getGrade()).sum());
         } else {
             Student studentDB = studentServices.findOne(idStudent);
             model.addAttribute("student", studentDB);

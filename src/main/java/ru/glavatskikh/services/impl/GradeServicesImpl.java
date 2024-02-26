@@ -18,6 +18,7 @@ public class GradeServicesImpl implements GradeServices {
 
     @Override
     public List<Grade> getAll(Student student) {
+        log.info("Get all Grade");
         return gradeRepository.getByStudent(student);
     }
 }

@@ -14,6 +14,7 @@ public class GroupServicesImpl implements GroupServices {
     private final GroupRepository groupRepository;
 
     public void save(Group group) {
+        log.info("Save Group", group);
         groupRepository.save(group);
     }
 }

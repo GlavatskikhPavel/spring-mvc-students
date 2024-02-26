@@ -35,12 +35,14 @@
                             <div>Фамилия</div>
                             <label for="surname">
                                 <input type="text" th:field="*{surname}" name="surname" id="surname">
+                                <div style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
                             </label>
                         </div>
                         <div class="line2">
                             <div>Имя</div>
                             <label for="name">
                                 <input type="text" th:field="*{name}" name="name" id="name">
+                                <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>
                             </label>
                         </div>
                         <div class="line2">
@@ -53,8 +55,8 @@
                         <div class="line2">
                             <div>Дата поступления</div>
                             <label for="admissionDate">
-                                <input type="text" th:field="*{admissionDate}" name="admissionDate"
-                                id="admissionDate">
+                                <input type="text" th:field="*{admissionDate}" name="admissionDate" id="admissionDate">
+                                <div style="color:red" th:if="${#fields.hasErrors('admissionDate')}" th:errors="*{admissionDate}">AdmissionDate Error</div>
                             </label>
                         </div>
                         <input class="button_cm_student" type="submit" value="Применить">

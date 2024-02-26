@@ -19,17 +19,20 @@ public class TermServicesImpl implements TermServices {
 
     @Override
     public List<Term> getAll() {
+        log.info("Get all Term");
         return termRepository.findAll();
     }
 
     @Override
     public void save(Term term) {
         term.setName("Семестр " + (Integer.parseInt(getLastId()) + 1));
+        log.info("Save Term", term.getName());
         termRepository.save(term);
     }
 
     @Override
     public void delete(Long id) {
+        log.info("Delete Term");
         termRepository.delete(findOne(id));
     }
 
@@ -42,12 +45,14 @@ public class TermServicesImpl implements TermServices {
         newTerm.setDisciplines(term.getDisciplines());
         newTerm.setDuration(term.getDuration());
         newTerm.setGrades(termDB.getGrades());
+        log.info("Update Term", newTerm.getName());
         termRepository.save(newTerm);
     }
 
     @Override
     public Term findOne(Long id) {
         Optional<Term> foundTerm = termRepository.findById(id);
+        log.info("Term found", foundTerm);
         return foundTerm.orElse(null);
     }
 

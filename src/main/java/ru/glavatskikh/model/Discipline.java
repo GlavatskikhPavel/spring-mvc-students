@@ -1,6 +1,8 @@
 package ru.glavatskikh.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -19,6 +21,8 @@ public class Discipline {
     @Column(name = "id", unique = true)
     private Long id;
 
+    @NotEmpty(message = "Наименование дисциплины не должно быть пустым")
+    @Size(min = 2, max = 30, message = "От 2 до 30 символов длиной")
     @Column(name = "name")
     private String name;
 
