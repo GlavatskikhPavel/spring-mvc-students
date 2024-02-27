@@ -18,6 +18,7 @@
         <section class="form_log">
             <h2 class="log_title">Вход в систему</h2>
             <form action="/process_login" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                 <div class="line">
                     <div>Логин</div>
                     <label for="username">
