@@ -1,10 +1,9 @@
 package ru.glavatskikh.model;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
