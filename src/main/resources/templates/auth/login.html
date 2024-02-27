@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login page</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/fonts/fonts.css}" rel="stylesheet" />
+</head>
+<body>
+<div id="container">
+    <header>
+        <h1>Система управления студентами и их успеваемостью</h1>
+    </header>
+    <main>
+        <section class="form_log">
+            <h2 class="log_title">Вход в систему</h2>
+            <form action="/process_login" method="post">
+                <div class="line">
+                    <div>Логин</div>
+                    <label for="username">
+                        <input type="text" name="username" id="username"/>
+                    </label>
+                </div>
+                <div class="line">
+                    <div>Пароль</div>
+                    <label for="password">
+                        <input type="password" name="password" id="password"/>
+                    </label>
+                </div>
+<!--                <div class="line">-->
+<!--                    <div>Права</div>-->
+<!--                    <label>-->
+<!--                        <select name="role">-->
+<!--                            <option value="3">Студент</option>-->
+<!--                            <option value="2">Учитель</option>-->
+<!--                            <option value="1">Администратор</option>-->
+<!--                        </select>-->
+<!--                    </label>-->
+<!--                </div>-->
+                <input class="button_enter" type="submit" value="Войти">
+                <div th:if="${param.error}" style="color: red">
+                    Неправильные имя или пароль
+                </div>
+            </form>
+        </section>
+    </main>
+<!--    <h4>Права "Администратор", "Учитель", "Студент" - Login: admin, Password: 123</h4>-->
+<!--    <h4>Права "Учитель", "Студент" - Login: teacher, Password: 123</h4>-->
+<!--    <h4>Права "Студент" - Login: student, Password: 123</h4>-->
+</div>
+</body>
+</html>
