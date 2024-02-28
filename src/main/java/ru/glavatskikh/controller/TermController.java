@@ -1,6 +1,7 @@
 package ru.glavatskikh.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,12 +37,14 @@ public class TermController {
         return "term/list";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/new")
     public String getFormNew(@ModelAttribute("term") Term term, Model model) {
         model.addAttribute("disciplineList", disciplineServices.getAll());
         return "term/new";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/edit")
     public String getEdit(@RequestParam(value = "idModify", required = false) Long id,
                           Model model, @ModelAttribute("term") Term term) {
@@ -68,6 +71,7 @@ public class TermController {
         return "redirect:/terms";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping
     public String delete(@RequestParam(value = "idDelete", required = false) Long id) {
         if (id == null) {

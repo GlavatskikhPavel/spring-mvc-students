@@ -15,8 +15,11 @@
     <nav class="head">
       <h1 class="title">Система управления студентами и их успеваемостью</h1>
       <div class="login">
-        <div><p>Привет, admin!</p></div>
-        <div><a href="/logout">Logout</a></div>
+        <form th:action="@{/logout}" th:method="POST">
+          <label>
+            <input th:type="submit" th:value="logout">
+          </label>
+        </form>
       </div>
     </nav>
   </header>

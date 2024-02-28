@@ -1,6 +1,7 @@
 package ru.glavatskikh.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,11 +29,13 @@ public class StudentControllers {
         return "student/list";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/new")
     public String getFormNew(@ModelAttribute("student") Student student) {
         return "student/new";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/edit")
     public String getEdit(@RequestParam("idModify") Long id, Model model) {
         model.addAttribute("student", studentServices.findOne(id));
@@ -56,12 +59,14 @@ public class StudentControllers {
         return "redirect:/students";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping()
     public String delete(@RequestParam("idsDelete") String idsDelete) {
         studentServices.delete(idsDelete);
         return "redirect:/students";
     }
 
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
     @GetMapping("/progress")
     public String progress(@RequestParam(value = "id_progress", required = false) Long idStudent,
                            @RequestParam(value = "id", required = false) Long idTerm,
@@ -77,7 +82,7 @@ public class StudentControllers {
                     .collect(Collectors.toList());
             model.addAttribute("grades", gradesTermId);
             model.addAttribute("termList", termServices.getAll());
-            model.addAttribute("summa", gradesTermId.stream().mapToInt(n -> n.getGrade()).sum());
+            model.addAttribute("summa", gradesTermId.stream().mapToInt(Grade::getGrade).sum());
         } else {
             Student studentDB = studentServices.findOne(idStudent);
             model.addAttribute("student", studentDB);

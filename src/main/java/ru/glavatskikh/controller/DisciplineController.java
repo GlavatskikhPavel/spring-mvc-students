@@ -1,6 +1,7 @@
 package ru.glavatskikh.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,11 +23,13 @@ public class DisciplineController {
         return "discipline/list";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/new")
     public String getFormNew(@ModelAttribute("discipline") Discipline discipline) {
         return "discipline/new";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/edit")
     public String getEdit(@RequestParam("idModify") Long idModify, Model model) {
         model.addAttribute("discipline", disciplineServices.getById(idModify));
@@ -49,6 +52,7 @@ public class DisciplineController {
         return "redirect:/disciplines";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping()
     public String delete(@RequestParam("idsDelete") String idsDelete) {
         disciplineServices.delete(idsDelete);

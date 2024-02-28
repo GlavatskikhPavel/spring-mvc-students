@@ -93,6 +93,7 @@ public class StudentServicesImpl implements StudentServices {
 
     public Student findOne(Long id) {
         Optional<Student> foundStudent =studentRepository.findById(id);
+        log.info("Student found one: {}", foundStudent);
         return foundStudent.orElse(null);
     }
 }
