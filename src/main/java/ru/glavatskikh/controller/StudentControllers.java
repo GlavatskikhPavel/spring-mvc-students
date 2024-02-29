@@ -87,8 +87,13 @@ public class StudentControllers {
             Student studentDB = studentServices.findOne(idStudent);
             model.addAttribute("student", studentDB);
             List<Grade> grades = studentDB.getGrades();
+            List<Grade> gradesTermId = grades
+                    .stream()
+                    .filter(n -> n.getTerm().getId() == 1)
+                    .collect(Collectors.toList());
             model.addAttribute("termList", termServices.getAll());
-            model.addAttribute("grades", grades);
+            model.addAttribute("grades", gradesTermId);
+            model.addAttribute("summa", gradesTermId.stream().mapToInt(Grade::getGrade).sum());
         }
         return "student/progress";
     }

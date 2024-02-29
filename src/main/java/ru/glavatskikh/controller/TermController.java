@@ -23,8 +23,9 @@ public class TermController {
                          @RequestParam(value = "id", required = false) Long id) {
         if (id == null) {
             List<Term> terms = termServices.getAll();
+            Term termDb = termServices.findOne(1L);
+            model.addAttribute("disciplineList", termServices.getDisciplines(termDb));
             model.addAttribute("termList", terms);
-            model.addAttribute("disciplineList", disciplineServices.getAll());
             model.addAttribute("duration", terms.get(0).getDuration());
         } else {
             Term termDb = termServices.findOne(id);
