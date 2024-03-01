@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "comic";
+    src: url("./comic.ttf") format("woff");
+}
+
+@font-face {
+    font-family: "micross";
+    src: url("./micross.ttf") format("woff");
+}
+
+@font-face {
+    font-family: "ariali";
+    src: url("./ariali.ttf") format("woff");
+}

@@ -28,6 +28,6 @@ public class Discipline {
     @OneToMany(mappedBy = "discipline", cascade = CascadeType.ALL)
     private List<Grade> grades = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "disciplines")
+    @ManyToMany(mappedBy = "disciplines", cascade = CascadeType.ALL)
     private List<Term> terms = new ArrayList<>();
 }
