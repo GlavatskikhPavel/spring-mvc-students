@@ -75,7 +75,7 @@ public class TermController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping
     public String delete(@RequestParam(value = "idDelete", required = false) Long id) {
-        if (id == null) {
+        if (id == null || id == 1) {
             return "redirect:/terms";
         }
         termServices.delete(id);

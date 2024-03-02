@@ -28,6 +28,10 @@ public class Discipline {
     @OneToMany(mappedBy = "discipline", cascade = CascadeType.ALL)
     private List<Grade> grades = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "disciplines", cascade = CascadeType.ALL)
+    @ManyToMany
+    @JoinTable(
+            name = "term_discipline",
+            joinColumns = @JoinColumn(name = "discipline_id", referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name = "term_id", referencedColumnName="id"))
     private List<Term> terms = new ArrayList<>();
 }
