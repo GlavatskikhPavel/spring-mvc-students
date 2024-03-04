@@ -9,6 +9,18 @@
     <title>New Student</title>
     <link th:href="@{/css/style.css}" rel="stylesheet" />
     <link th:href="@{/fonts/fonts.css}" rel="stylesheet" />
+    <link th:href="@{/css/jquery-ui.min.css}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-ui.min.js}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#datepicker').datepicker({
+                dateFormat: "dd/mm/yy",
+                changeMonth: true,
+                changeYear: true
+            });
+        })
+    </script>
 </head>
 <body>
 <div id="container">
@@ -57,8 +69,8 @@
                         </div>
                         <div class="line2">
                             <div>Дата поступления</div>
-                            <label for="student-admission-date">
-                                <input type="text" th:field="*{admissionDate}" id="student-admission-date"/>
+                            <label for="datepicker">
+                                <input type="text" th:field="*{admissionDate}" id="datepicker"/>
                                 <div style="color:red" th:if="${#fields.hasErrors('admissionDate')}" th:errors="*{admissionDate}">AdmissionDate Error</div>
                             </label>
                         </div>

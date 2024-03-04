@@ -16,7 +16,7 @@ function modifyDiscipline() {
 function deleteDisciplines() {
     let checkedCheckboxes = document.querySelectorAll('input[name=idDiscipline]:checked');
     if (checkedCheckboxes.length == 0) {
-        alert('Пожалуйста, выберите хотя бы одного студента');
+        alert('Пожалуйста, выберите хотя бы одну дисциплину');
         return;
     }
     let ids = "";
