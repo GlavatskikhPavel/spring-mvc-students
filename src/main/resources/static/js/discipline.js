@@ -1,11 +1,11 @@
 function modifyDiscipline() {
     let checkedCheckboxes = document.querySelectorAll('input[name=idDiscipline]:checked');
     if (checkedCheckboxes.length == 0) {
-        alert('Пожалуйста, выберете одну дисциплину');
+        alert('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РѕРґРЅСѓ РґРёСЃС†РёРїР»РёРЅСѓ');
         return;
     }
     if (checkedCheckboxes.length > 1) {
-        alert('Пожалуйста, выберете только одну дисциплину');
+        alert('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ С‚РѕР»СЊРєРѕ РѕРґРЅСѓ РґРёСЃС†РёРїР»РёРЅСѓ');
         return;
     }
     let id = checkedCheckboxes[0].value;
@@ -16,7 +16,7 @@ function modifyDiscipline() {
 function deleteDisciplines() {
     let checkedCheckboxes = document.querySelectorAll('input[name=idDiscipline]:checked');
     if (checkedCheckboxes.length == 0) {
-        alert('Пожалуйста, выберете хотя бы одного студента');
+        alert('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ С…РѕС‚СЏ Р±С‹ РѕРґРЅРѕРіРѕ СЃС‚СѓРґРµРЅС‚Р°');
         return;
     }
     let ids = "";

@@ -11,6 +11,7 @@ import ru.glavatskikh.model.Student;
 import ru.glavatskikh.model.Term;
 import ru.glavatskikh.services.StudentServices;
 import ru.glavatskikh.services.TermServices;
+import ru.glavatskikh.validator.StudentValidator;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class StudentControllers {
     private final StudentServices studentServices;
     private final TermServices termServices;
+    private final StudentValidator studentValidator;
 
     @GetMapping()
     public String getAll(Model model) {
@@ -45,6 +47,7 @@ public class StudentControllers {
     @PostMapping()
     public String save(@ModelAttribute("student") @Valid Student student,
                        BindingResult bindingResult) {
+        studentValidator.validate(student, bindingResult);
         if (bindingResult.hasErrors()) return "student/new";
         studentServices.save(student);
         return "redirect:/students";
@@ -54,6 +57,7 @@ public class StudentControllers {
     public String update(@ModelAttribute("student") @Valid Student student,
                          BindingResult bindingResult,
                          @RequestParam("id") Long id) {
+        studentValidator.validate(student, bindingResult);
         if (bindingResult.hasErrors()) return "student/edit";
         studentServices.update(id, student);
         return "redirect:/students";

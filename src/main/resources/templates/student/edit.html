@@ -53,6 +53,7 @@
                             <label for="group">
                                 <input type="text" th:field="*{group.name}" name="group" id="group">
                                 <input type="hidden" th:field="*{group.id}">
+                                <div style="color:red" th:if="${#fields.hasErrors('group.name')}" th:errors="*{group.name}">Group Error</div>
                             </label>
                         </div>
                         <div class="line2">

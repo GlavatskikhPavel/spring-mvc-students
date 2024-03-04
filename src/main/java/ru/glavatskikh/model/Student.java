@@ -33,10 +33,9 @@ public class Student {
     @Column(name = "surname")
     private String surname;
 
-    @NotNull(message = "Укажите дату поступления. ДД/ММ/ГГГГ")
     @Column(name = "admission_date")
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")            // ДД/ММ/ГГГГ
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date admissionDate;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)

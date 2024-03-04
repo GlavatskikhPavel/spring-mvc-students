@@ -1,7 +1,7 @@
 function deleteStudents() {
     let checkedCheckboxes = document.querySelectorAll('input[name=idStudent]:checked');
     if (checkedCheckboxes.length == 0) {
-        alert('Пожалуйста, выберете хотя бы одного студента');
+        alert('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ С…РѕС‚СЏ Р±С‹ РѕРґРЅРѕРіРѕ СЃС‚СѓРґРµРЅС‚Р°');
         return;
     }
     let ids = "";
@@ -15,11 +15,11 @@ function deleteStudents() {
 function modifyStudent() {
     let checkedCheckboxes = document.querySelectorAll('input[name=idStudent]:checked');
     if (checkedCheckboxes.length == 0) {
-        alert('Пожалуйста, выберете одного студента');
+        alert('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РѕРґРЅРѕРіРѕ СЃС‚СѓРґРµРЅС‚Р°');
         return;
     }
     if (checkedCheckboxes.length > 1) {
-        alert('Пожалуйста, выберете только одного студента');
+        alert('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ С‚РѕР»СЊРєРѕ РѕРґРЅРѕРіРѕ СЃС‚СѓРґРµРЅС‚Р°');
         return;
     }
     let id = checkedCheckboxes[0].value;
@@ -30,11 +30,11 @@ function modifyStudent() {
 function progressStudents() {
     let checkedCheckboxes = document.querySelectorAll('input[name=idStudent]:checked');
     if (checkedCheckboxes.length == 0) {
-        alert('Пожалуйста, выберете одного студента');
+        alert('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ РѕРґРЅРѕРіРѕ СЃС‚СѓРґРµРЅС‚Р°');
         return;
     }
     if (checkedCheckboxes.length > 1) {
-        alert('Пожалуйста, выберете только одного студента');
+        alert('РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ С‚РѕР»СЊРєРѕ РѕРґРЅРѕРіРѕ СЃС‚СѓРґРµРЅС‚Р°');
         return;
     }
     let id = checkedCheckboxes[0].value;
