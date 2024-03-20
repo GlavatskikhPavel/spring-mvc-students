@@ -32,8 +32,9 @@ public class TermServicesImpl implements TermServices {
 
     @Override
     public void delete(Long id) {
-        log.info("Delete Term");
-        termRepository.delete(findOne(id));
+        Term termDB = findOne(id);
+        log.info("Delete Term: {}", termDB.getName());
+        termRepository.delete(termDB);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class TermServicesImpl implements TermServices {
     @Override
     public Term findOne(Long id) {
         Optional<Term> foundTerm = termRepository.findById(id);
-        log.info("Term found: {}", foundTerm);
+        log.info("Term found: {}", foundTerm.get().getName());
         return foundTerm.orElse(null);
     }
 

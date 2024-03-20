@@ -24,7 +24,7 @@ public class DisciplineServicesImpl implements DisciplineServices {
 
     @Override
     public void save(Discipline discipline) {
-        log.info("Save new Disciplines");
+        log.info("Save new Disciplines: {}", discipline.getName());
         disciplineRepository.save(discipline);
     }
 
@@ -43,7 +43,7 @@ public class DisciplineServicesImpl implements DisciplineServices {
         Discipline updateDiscipline = new Discipline();
         updateDiscipline.setId(discipline.getId());
         updateDiscipline.setName(discipline.getName());
-        log.info("Update Disciplines");
+        log.info("Update Disciplines: {}", discipline.getName());
         disciplineRepository.save(updateDiscipline);
     }
 

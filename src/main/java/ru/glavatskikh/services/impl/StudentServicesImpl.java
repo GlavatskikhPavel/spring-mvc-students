@@ -84,7 +84,7 @@ public class StudentServicesImpl implements StudentServices {
     private Group getGroup(String name) throws NullPointerException {
         Group groupDb = groupRepository.findGroupByName(name);
         if (groupDb == null) {
-            log.info("There is no such group in the database");
+            log.info("There is no such group in the database: {}", name);
         } else {
             log.info("Get group by name: {}", groupDb.getName());
         }
@@ -93,7 +93,7 @@ public class StudentServicesImpl implements StudentServices {
 
     public Student findOne(Long id) {
         Optional<Student> foundStudent =studentRepository.findById(id);
-        log.info("Student found one: {}", foundStudent);
+        log.info("Student found one: {}", foundStudent.get().getName());
         return foundStudent.orElse(null);
     }
 }
