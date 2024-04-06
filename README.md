@@ -4,6 +4,7 @@
 + Spring Boot
 + Spring Security
      + аутентификация 
+     + авторизация
 + Spring Data JPA 
 + Hibernate ORM
      + Связывание сущностей ManyToOne, OneToMany, ManyToMany 

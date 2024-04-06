@@ -40,11 +40,10 @@ public class DisciplineServicesImpl implements DisciplineServices {
 
     @Override
     public void update(Long id, Discipline discipline) {
-        Discipline updateDiscipline = new Discipline();
-        updateDiscipline.setId(discipline.getId());
-        updateDiscipline.setName(discipline.getName());
+        Discipline disciplineDb = getById(id);
+        disciplineDb.setName(discipline.getName());
         log.info("Update Disciplines: {}", discipline.getName());
-        disciplineRepository.save(updateDiscipline);
+        disciplineRepository.save(disciplineDb);
     }
 
     @Override
