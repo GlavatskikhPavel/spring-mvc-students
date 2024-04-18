@@ -70,7 +70,7 @@ public class StudentControllers {
         return "redirect:/students";
     }
 
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/progress")
     public String progress(@RequestParam(value = "id_progress", required = false) Long idStudent,
                            @RequestParam(value = "id", required = false) Long idTerm,
