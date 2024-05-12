@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ru.glavatskikh.model.Discipline;
 import ru.glavatskikh.model.Grade;
 import ru.glavatskikh.model.Student;
 import ru.glavatskikh.model.Term;
@@ -86,7 +87,9 @@ public class StudentControllers {
                     .collect(Collectors.toList());
             model.addAttribute("grades", gradesTermId);
             model.addAttribute("termList", termServices.getAll());
-            model.addAttribute("summa", gradesTermId.stream().mapToInt(Grade::getGrade).sum());
+            model.addAttribute("summa", gradesTermId
+                    .stream().mapToInt(Grade::getGrade).sum() * 1.0 /
+                    gradesTermId.stream().map(Grade::getDiscipline).toList().size());
         } else {
             Student studentDB = studentServices.findOne(idStudent);
             model.addAttribute("student", studentDB);
@@ -97,7 +100,8 @@ public class StudentControllers {
                     .collect(Collectors.toList());
             model.addAttribute("termList", termServices.getAll());
             model.addAttribute("grades", gradesTermId);
-            model.addAttribute("summa", gradesTermId.stream().mapToInt(Grade::getGrade).sum());
+            model.addAttribute("summa", gradesTermId
+                    .stream().mapToInt(Grade::getGrade).sum() * 1.0 / 5.0);
         }
         return "student/progress";
     }
