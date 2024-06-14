@@ -17,6 +17,7 @@ import ru.glavatskikh.validator.StudentValidator;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RequestMapping("/students")
 @Controller
@@ -80,10 +81,8 @@ public class StudentControllers {
         if (idTerm != null) {
             Student studentDB = studentServices.findOne(idStudent);
             model.addAttribute("student", studentDB);
-            List<Grade> grades = studentDB.getGrades();
-            List<Grade> gradesTermId = grades
-                    .stream()
-                    .filter(n -> n.getTerm().getId().equals(idTerm))
+            List<Grade> gradesTermId = studentDB
+                    .getGrades().stream().filter(n -> n.getTerm().getId().equals(idTerm))
                     .collect(Collectors.toList());
             model.addAttribute("grades", gradesTermId);
             model.addAttribute("termList", termServices.getAll());
@@ -93,9 +92,7 @@ public class StudentControllers {
         } else {
             Student studentDB = studentServices.findOne(idStudent);
             model.addAttribute("student", studentDB);
-            List<Grade> grades = studentDB.getGrades();
-            List<Grade> gradesTermId = grades
-                    .stream()
+            List<Grade> gradesTermId = studentDB.getGrades().stream()
                     .filter(n -> n.getTerm().getId() == 1)
                     .collect(Collectors.toList());
             model.addAttribute("termList", termServices.getAll());
